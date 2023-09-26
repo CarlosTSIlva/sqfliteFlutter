@@ -41,7 +41,7 @@ jobs:
       - name: Setup Bundle
         run: sudo gem install bundler
       - name: build android
-        run: flutter build apk --debug && cd android && sudo fastlane add_plugin firebase_app_distribution && sudo fastlane android build
+        run: flutter build apk --debug && cd android
       - name: 🧪📊 Publish coverage report
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
