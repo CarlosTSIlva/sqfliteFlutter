@@ -5,7 +5,7 @@ name: PR relese
 on:
     push:
         branches:
-            - master
+            - main
 
 jobs:
     build:
