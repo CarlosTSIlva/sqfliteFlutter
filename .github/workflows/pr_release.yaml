@@ -76,5 +76,5 @@ jobs:
       - name: Setup Bundle
         run: sudo gem install bundler
       - name: build ios
-        run: flutter build ios --debug --no-codesign
+        run: flutter build ipa
       
