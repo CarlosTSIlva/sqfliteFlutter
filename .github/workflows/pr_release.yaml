@@ -1,11 +1,6 @@
-# create ci / cd git hub
-
 name: PR relese
 
-on:
-    push:
-        branches:
-            - main
+on: pull_request
 
 jobs:
     build:
