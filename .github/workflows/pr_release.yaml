@@ -27,23 +27,24 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: "3.7.7"
-          channel: 'stable'
+      # - name: Setup Flutter
+      #   uses: subosito/flutter-action@v1
+      #   with:
+      #     flutter-version: "3.7.7"
+      #     channel: 'stable'
       - name: Install dependencies
         run: flutter pub get
       - name: Check lints
         run: flutter analyze
       - name: 🧪📊 Generate coverage report
         run: flutter test --coverage --coverage-path=coverage/lcov.info
-      - name: Setup Bundle
-        run: sudo gem install bundler
-      - name: build android
-        run: flutter build apk --debug && cd android
+      # - name: Setup Bundle
+      #   run: sudo gem install bundler
+      # - name: build android
+      #   run: flutter build apk --debug && cd android
       - name: 🧪📊 Publish coverage report
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: coverage/lcov.info
           title: 'Coverage Report'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
