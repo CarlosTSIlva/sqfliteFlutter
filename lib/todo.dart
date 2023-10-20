@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Todo {
   final int id;
   final String title;
@@ -10,14 +8,6 @@ class Todo {
     required this.done,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'done': done,
-    };
-  }
-
   factory Todo.fromMap(Map<String, dynamic> map) {
     return Todo(
       id: map['id'] as int,
@@ -25,9 +15,4 @@ class Todo {
       done: map['done'] as int,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Todo.fromJson(String source) =>
-      Todo.fromMap(json.decode(source) as Map<String, dynamic>);
 }

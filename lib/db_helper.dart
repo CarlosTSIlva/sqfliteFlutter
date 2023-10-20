@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:sqflite/sqflite.dart';
 import 'package:sql/todo.dart';
 
