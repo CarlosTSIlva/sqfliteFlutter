@@ -18,14 +18,6 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final Dbhelper dbHelper = widget.dbHelper!;
@@ -34,13 +26,22 @@ class _TodoPageState extends State<TodoPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () async {
+                    setState(() {
+                      dbHelper.insertNotes('Hello', 0);
+                    });
+                  },
+                  child: const Text("adicionar"),
+                ),
               ),
               FutureBuilder(
                 future: dbHelper.selectNotes(),
@@ -53,7 +54,7 @@ class _TodoPageState extends State<TodoPage> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(e.title),
+                                    Text("${e.title} e id: ${e.id}"),
                                     Switch(
                                       value: e.done == 1 ? true : false,
                                       onChanged: (value) {
@@ -87,21 +88,9 @@ class _TodoPageState extends State<TodoPage> {
                   }
                 },
               ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          _incrementCounter();
-          await dbHelper.insertNotes('Hello $_counter', 0);
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

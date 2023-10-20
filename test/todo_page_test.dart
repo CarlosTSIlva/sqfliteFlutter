@@ -93,27 +93,10 @@ void main() {
 
       when(mockDbHelper.insertNotes("any", 1))
           .thenAnswer((_) => Future.value());
-      await widgetTester.tap(find.byIcon(Icons.add));
+      await widgetTester.tap(find.text("adicionar"));
       await widgetTester.pump();
 
       // pump await
-    });
-    testWidgets('should increment the counter when the button is pressed',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: TodoPage(title: 'My Todo List', dbHelper: mockDbHelper),
-        ),
-      );
-
-      expect(find.text('0'), findsOneWidget);
-
-      await tester.tap(find.byIcon(Icons.add));
-      await tester.pump();
-
-      expect(find.text('1'), findsOneWidget);
-
-      await tester.tap(find.byIcon(Icons.add));
     });
 
     testWidgets('should display notes', (WidgetTester tester) async {
@@ -131,8 +114,8 @@ void main() {
       // Verify that CircularProgressIndicator is not displayed
       expect(find.byType(CircularProgressIndicator), findsNothing);
 
-      expect(find.text('Note 1'), findsOneWidget);
-      expect(find.text('Note 2'), findsOneWidget);
+      expect(find.text('Note 1 e id: 1'), findsOneWidget);
+      expect(find.text('Note 2 e id: 2'), findsOneWidget);
     });
 
     testWidgets('should select todo and change to done',
@@ -151,8 +134,8 @@ void main() {
       // Verify that CircularProgressIndicator is not displayed
       expect(find.byType(CircularProgressIndicator), findsNothing);
 
-      expect(find.text('Note 1'), findsOneWidget);
-      expect(find.text('Note 2'), findsOneWidget);
+      expect(find.text('Note 1 e id: 1'), findsOneWidget);
+      expect(find.text('Note 2 e id: 2'), findsOneWidget);
 
       await tester.tap(find.byType(Switch).first);
       await tester.pump();
@@ -182,10 +165,10 @@ void main() {
       // Verify that CircularProgressIndicator is not displayed
       expect(find.byType(CircularProgressIndicator), findsNothing);
 
-      expect(find.text('Note 1'), findsOneWidget);
-      expect(find.text('Note 2'), findsOneWidget);
+      expect(find.text('Note 1 e id: 1'), findsOneWidget);
+      expect(find.text('Note 2 e id: 2'), findsOneWidget);
 
-      await tester.tap(find.byType(TextButton).first);
+      await tester.tap(find.text("delete").first);
       await tester.pumpAndSettle();
       verify(mockDbHelper.deleteNotes(1)).called(1);
     });
